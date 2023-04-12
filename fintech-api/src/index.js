@@ -11,14 +11,14 @@ const customers = [];
 function verifyIfExistsAccountCPF(request, response, next) {
     const { cpf } = request.headers;
 
-    const custumer = custumer.find((custumer) => custumer.cpf === cpf);
+    const customer = customers.find((customer) => customer.cpf === cpf);
 
     // nao permitir para conta nao existente
-    if (!custumer) {
+    if (!customer) {
         return response.status(400).json({ error: "Customer not found"});
     }
 
-    request.custumer = custumer;
+    request.customer = customer;
 
     return next();
 }
@@ -48,7 +48,7 @@ app.post("/account", (request, response) => {
 
     // nao permitir criar conta para cpf existente
     const customersAlreadyExists = customers.some(
-        (custumer) => custumer.cpf === cpf
+        (customer) => customer.cpf === cpf
     );
 
     if (customersAlreadyExists) {
@@ -61,20 +61,22 @@ app.post("/account", (request, response) => {
         id: uuidv4(),
         statement: [],
     })
+
+    return response.status(201).send();
 });
 
 // buscar extrato bancario
-app.get("/statement/", (request, response) => {
-    const { custumer } = request
+app.get("/statement", verifyIfExistsAccountCPF, (request, response) => {
+    const { customer } = request
 
-    return response.json(custumer.statement);
+    return response.json(customer.statement);
 });
 
-// realizar um deposito
+// realizar um deposito 
 app.post("/deposit", verifyIfExistsAccountCPF, (request, response) => {
     const { description, amount } = request.body;
 
-    const { custumer } = request;
+    const { customer } = request;
 
     const statementOperation = {
         description,
@@ -83,7 +85,7 @@ app.post("/deposit", verifyIfExistsAccountCPF, (request, response) => {
         type: "credit"
     }
 
-    custumer.statement.push(statementOperation);
+    customer.statement.push(statementOperation);
 
     return response.status(201).send();
 });
@@ -92,13 +94,13 @@ app.post("/deposit", verifyIfExistsAccountCPF, (request, response) => {
 app.post("/withdraw", verifyIfExistsAccountCPF, (request, response) => {
     const { amount } = request.body;
 
-    const { custumer } = request;
+    const { customer } = request;
 
-    const balance = getBalance(custumer.statement);
+    const balance = getBalance(customer.statement);
 
     // verificar se tem saldo
     if(balance < amount) {
-        return response.status(400).json({ error: "insufficient funds"})
+        return response.status(400).json({ error: "Insufficient funds"})
     }
 
     const statementOperation = {
@@ -107,9 +109,23 @@ app.post("/withdraw", verifyIfExistsAccountCPF, (request, response) => {
         type: "debit"
     }
 
-    custumer.statement.push(statementOperation);
+    customer.statement.push(statementOperation);
 
     return response.status(201).send();
+});
+
+// buscar extrato bancario por data
+app.get("/statement/data", verifyIfExistsAccountCPF, (request, response) => {
+    const { customer } = request
+    const { date } = request.query;
+
+    const dateFormat = new Date(date + " 00:00");
+
+    const statement = customer.statement.filter(
+        (statement) => statement.created_at.toDateString() === 
+        new Date(dateFormat).toDateString())
+
+    return response.json(customer.statement);
 });
 
 app.listen(3333);
