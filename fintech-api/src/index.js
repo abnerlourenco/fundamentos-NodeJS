@@ -5,40 +5,7 @@ const app =express();
 
 app.use(express.json());
 
-const customers = [
-    {
-        "cpf": "12345678910",
-        "name": "John"
-    },
-    {
-        "cpf": "12345678911",
-        "name": "Abner"
-    },
-    {
-        "cpf": "12345678912",
-        "name": "Creosvaldo"
-    },
-    {
-        "cpf": "12345678913",
-        "name": "Julcesvildo"
-    },
-    {
-        "cpf": "12345678914",
-        "name": "Gabrianderson"
-    },
-    {
-        "cpf": "12345678915",
-        "name": "Marcos caio"
-    },
-    {
-        "cpf": "12345678916",
-        "name": "Juvanio"
-    },
-    {
-        "cpf": "12345678917",
-        "name": "cremerson"
-    },
-];
+const customers = [];
 
 // Middleware para verificar se é uma conta existente
 function verifyIfExistsAccountCPF(request, response, next) {
@@ -56,7 +23,7 @@ function verifyIfExistsAccountCPF(request, response, next) {
     return next();
 }
 
-// calcula o saldo da conta
+// calcular o saldo da conta
 function getBalance(statement) {
     const balance = statement.reduce((acc, operation) => {
         if (operation.type === 'credit') {
@@ -187,6 +154,16 @@ app.delete("/account", verifyIfExistsAccountCPF, (request, response) => {
     customers.splice(indexCustomer, 1);
 
     return response.status(200).json(customers);
+});
+
+// buscar saldo da conta
+app.get("/balance", verifyIfExistsAccountCPF, (request, response) => {
+    const { customer } = request;
+
+    const balance = getBalance(customer.statement);
+    return response.json({
+        "balance": balance
+    });
 });
 
 app.listen(3333);
