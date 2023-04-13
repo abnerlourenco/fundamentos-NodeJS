@@ -5,7 +5,40 @@ const app =express();
 
 app.use(express.json());
 
-const customers = [];
+const customers = [
+    {
+        "cpf": "12345678910",
+        "name": "John"
+    },
+    {
+        "cpf": "12345678911",
+        "name": "Abner"
+    },
+    {
+        "cpf": "12345678912",
+        "name": "Creosvaldo"
+    },
+    {
+        "cpf": "12345678913",
+        "name": "Julcesvildo"
+    },
+    {
+        "cpf": "12345678914",
+        "name": "Gabrianderson"
+    },
+    {
+        "cpf": "12345678915",
+        "name": "Marcos caio"
+    },
+    {
+        "cpf": "12345678916",
+        "name": "Juvanio"
+    },
+    {
+        "cpf": "12345678917",
+        "name": "cremerson"
+    },
+];
 
 // Middleware para verificar se é uma conta existente
 function verifyIfExistsAccountCPF(request, response, next) {
@@ -126,6 +159,34 @@ app.get("/statement/data", verifyIfExistsAccountCPF, (request, response) => {
         new Date(dateFormat).toDateString())
 
     return response.json(customer.statement);
+});
+
+// alterar informações da conta
+app.put("/account", verifyIfExistsAccountCPF, (request, response) => {
+    const { customer } = request;
+    const { name } = request.body;
+
+    customer.name = name;
+
+    return response.status(201).send();
+});
+
+// buscar informações da conta
+app.get("/account", verifyIfExistsAccountCPF, (request, response) => {
+    const { customer } = request;
+
+    return response.json(customer);
+});
+
+// deletar uma conta
+app.delete("/account", verifyIfExistsAccountCPF, (request, response) => {
+    const { customer } = request;
+
+    const indexCustomer = customers.indexOf(customer);
+
+    customers.splice(indexCustomer, 1);
+
+    return response.status(200).json(customers);
 });
 
 app.listen(3333);
