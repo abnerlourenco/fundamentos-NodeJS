@@ -1,8 +1,14 @@
-<strong>Este repositorio guarda a evolução de aprendizado em backend utilizando Node.js</strong>
-<p>Todo desenvolvimento é documentado separadamente por capitulos</p>
+## Este repositorio guarda a evolução de aprendizado em backend utilizando Node.js
+Todo desenvolvimento é documentado separadamente por capitulos
 
-<strong>capitulo 1 - </strong>
-[Fundamentos do node](https://www.notion.so/chapter-I-fundamentos-de-node-af42d13237f14045833e565a2e7ac147)
 
-<strong>capitulo 2 - </strong>
-[FinTech-API](https://www.notion.so/chapter-2-api-financeira-bc9dd896b6bb482d9229e02acbfa161e)
+## capitulo 1 - 
+<a href="/step-one-NodeJS">Fundamentos do NodeJS</a>
+
+---
+## capitulo 2 - 
+<a href="/fintech-api">finTech - API</a>
+
+---
+## Desafio 1 - 
+<a href="/desfio1-conceitos-do-nodejs">Conceitos do NodeJS</a>
