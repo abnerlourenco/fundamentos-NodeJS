@@ -28,7 +28,9 @@ function checksCreateTodosUserAvailability(request, response, next) {
     return next();
   }
 
-  if (user.todos.length() < 10) {
+  const todoQuantity = user.todos.length;
+
+  if (todoQuantity < 10) {
     return next();
   }
 
