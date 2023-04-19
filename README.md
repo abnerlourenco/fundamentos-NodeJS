@@ -33,11 +33,11 @@ entre outras funcionalidades, [saiba mais](https://www.notion.so/chapter-2-api-f
 ---
 ### Desafio 2 - Trabalhando com Middlewares
 > Desafio de completar o código de varios middlewares para que o codigo atinja os requisitos<br>
-> Sobre o desafio <a href="/desafio2-trabalhando-com-middlewares">Utilizando middlewares<a/>
+> Sobre o desafio <a href="/desafio2-trabalhando-com-middlewares">Utilizando middlewares</a>
   
 ---
 ### Desafio 3 - Corrigindo o Código
 > Objetivo de corrigir todas as rotas para obter o resultado desejado<br>
-> Mais informações do desafio <a href="/desafio3-corrigindo-o-codigo">Corrigindo o código<a/>
+> Mais informações do desafio <a href="/desafio3-corrigindo-o-codigo">Corrigindo o código</a>
 
 ---
