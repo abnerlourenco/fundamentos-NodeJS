@@ -15,7 +15,7 @@ E descrevendo quais são os parametros existentes em uma rota e como utilizar de
 > Clique em [Saiba mais](https://www.notion.so/chapter-I-fundamentos-de-node-af42d13237f14045833e565a2e7ac147)
 
 ---
-### Capitulo 2 - <a href="/fintech-api">finTech - API</a>
+### Capitulo 1 - <a href="/fintech-api">finTech - API</a>
 No segundo capitulo foi executado a criação de uma API para uma pequena instituição financeira.
 
 Dentro da API alguns requisitos deviam ser atendidos como:
@@ -29,5 +29,15 @@ entre outras funcionalidades, [saiba mais](https://www.notion.so/chapter-2-api-f
 ### Desafio 1 - Aplicando conhecimentos de conceitos
 > Testando o aprendizado até o momento<br>
 > Ver sobre o desafio <a href="/desafio1-conceitos-do-nodejs">Conceitos do NodeJS</a>
+
+---
+### Desafio 2 - Trabalhando com Middlewares
+> Desafio de completar o código de varios middlewares para que o codigo atinja os requisitos<br>
+> Sobre o desafio <a href="/desafio2-trabalhando-com-middlewares">Utilizando middlewares<a/>
+  
+---
+### Desafio 3 - Corrigindo o Código
+> Objetivo de corrigir todas as rotas para obter o resultado desejado<br>
+> Mais informações do desafio <a href="/desafio3-corrigindo-o-codigo">Corrigindo o código<a/>
 
 ---
