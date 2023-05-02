@@ -1,4 +1,4 @@
-import express, { json } from 'express';
+import express from 'express';
 import { createCourse } from './routes';
 
 const app = express();
