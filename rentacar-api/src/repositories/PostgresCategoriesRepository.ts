@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/consistent-type-imports */
 import { Category } from '../model/Category'
-import { ICreateCategoryDTO, ICategoryRepository } from './ICategoriesRepository'
+import { type ICreateCategoryDTO, type ICategoryRepository } from './ICategoriesRepository'
 
 class PostgresCategoriesRepository implements ICategoryRepository {
   private readonly categories: Category[]

@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/consistent-type-imports */
 import { Category } from '../model/Category'
-import { ICategoryRepository, ICreateCategoryDTO } from './ICategoriesRepository'
+import { type ICategoryRepository, type ICreateCategoryDTO } from './ICategoriesRepository'
 
 class CategoriesRepository implements ICategoryRepository {
   private readonly categories: Category[]

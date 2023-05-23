@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/consistent-type-imports */
 /* eslint-disable @typescript-eslint/method-signature-style */
-import { Category } from '../model/Category'
+import { type Category } from '../model/Category'
 
 interface ICreateCategoryDTO {
   name: string
