@@ -8,7 +8,6 @@ interface ICreateSpecificationDTO {
 
 interface ISpecificationRepository {
   findByName(name: string): Specification | undefined
-  list(): Specification[]
   create({ name, description }: ICreateSpecificationDTO): void
 }
 
