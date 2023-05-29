@@ -4,8 +4,18 @@ import { type ICategoryRepository, type ICreateCategoryDTO } from './ICategories
 class CategoriesRepository implements ICategoryRepository {
   private readonly categories: Category[]
 
-  constructor () {
+  private static INSTANCE: CategoriesRepository
+
+  private constructor () {
     this.categories = []
+  }
+
+  public static getInstance (): CategoriesRepository {
+    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+    if (!CategoriesRepository.INSTANCE) {
+      CategoriesRepository.INSTANCE = new CategoriesRepository()
+    }
+    return CategoriesRepository.INSTANCE
   }
 
   create ({ description, name }: ICreateCategoryDTO): void {
