@@ -1,5 +1,5 @@
-import { Category } from '../model/Category'
-import { type ICreateCategoryDTO, type ICategoryRepository } from './ICategoriesRepository'
+import { Category } from '../../model/Category'
+import { type ICreateCategoryDTO, type ICategoryRepository } from '../ICategoriesRepository'
 
 class PostgresCategoriesRepository implements ICategoryRepository {
   private readonly categories: Category[]
