@@ -4,8 +4,19 @@ import { type ISpecificationRepository, type ICreateSpecificationDTO } from '../
 class SpecificationsRepository implements ISpecificationRepository {
   private readonly specification: Specification[]
 
-  constructor () {
+  private static INSTANCE: SpecificationsRepository
+
+  private constructor () {
     this.specification = []
+  }
+
+  public static getInstance (): SpecificationsRepository {
+    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+    if (!SpecificationsRepository.INSTANCE) {
+      SpecificationsRepository.INSTANCE = new SpecificationsRepository()
+    }
+
+    return SpecificationsRepository.INSTANCE
   }
 
   create ({ description, name }: ICreateSpecificationDTO): void {
