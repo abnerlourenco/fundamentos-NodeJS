@@ -1,0 +1,11 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Rent a Car Documentation",
+        "description": "The Car Rental API provides a standardized and efficient way to interact with the car rental systems of multiple companies, enabling users to search, compare prices, make reservations, and manage their car rentals in a simplified manner.",
+        "version": "1.0.0",
+        "contact": {
+            "email": "suporte@rentacar.com"
+        }
+    }
+}
