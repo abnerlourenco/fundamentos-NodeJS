@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/method-signature-style */
-import { type Specification } from '../model/Specification'
+import { type Specification } from '../model/Specification';
 
 interface ICreateSpecificationDTO {
   name: string
@@ -12,4 +12,4 @@ interface ISpecificationRepository {
   create({ name, description }: ICreateSpecificationDTO): void
 }
 
-export type { ICreateSpecificationDTO, ISpecificationRepository }
+export type { ICreateSpecificationDTO, ISpecificationRepository };

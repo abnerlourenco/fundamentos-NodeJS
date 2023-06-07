@@ -62,16 +62,24 @@
                                     "items": {
                                         "type": "object",
                                         "properties": {
+                                            "id": {
+                                                "type":"string"
+                                            },
                                             "name": {
                                                 "type": "string"
                                             },
                                             "description": {
                                                 "type": "string"
+                                            },
+                                            "created_at": {
+                                                "type": "string"
                                             }
                                         },
                                         "example": {
+                                            "id": "uuid",
                                             "name": "category name exemple",
-                                            "description": "category description sample"
+                                            "description": "category description sample",
+                                            "created_at": "202x-xx-xxT01:37:49.317Z"
                                         }
                                     }
                                 }

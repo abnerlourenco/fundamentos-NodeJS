@@ -1,7 +1,7 @@
-import { parse } from 'csv-parse'
-import fs from 'fs'
+import { parse } from 'csv-parse';
+import fs from 'fs';
 
-import { type ICategoryRepository } from '../../repositories/ICategoriesRepository'
+import { type ICategoryRepository } from '../../repositories/ICategoriesRepository';
 
 interface IImportCategory {
   name: string
@@ -13,46 +13,48 @@ class ImportCategoriesUseCase {
 
   async loadCategories (file: Express.Multer.File): Promise<IImportCategory[]> {
     return await new Promise((resolve, reject) => {
-      const stream = fs.createReadStream(file.path)
-      const categories: IImportCategory[] = []
+      const stream = fs.createReadStream(file.path);
+      const categories: IImportCategory[] = [];
 
-      const parseFile = parse()
+      const parseFile = parse();
 
-      stream.pipe(parseFile)
+      stream.pipe(parseFile);
 
-      parseFile.on('data', (line) => {
-        const [name, description] = line
+      parseFile
+        .on('data', (line) => {
+          const [name, description] = line;
 
-        categories.push({
-          name,
-          description
+          categories.push({
+            name,
+            description
+          });
         })
-      })
         .on('end', () => {
-          resolve(categories)
+          void fs.promises.unlink(file.path);
+          resolve(categories);
         })
         .on('error', (err) => {
-          reject(err)
-        })
-    })
+          reject(err);
+        });
+    });
   }
 
   async execute (file: Express.Multer.File): Promise<void> {
-    const categories = await this.loadCategories(file)
+    const categories = await this.loadCategories(file);
 
     categories.map(async (category) => {
-      const { name, description } = category
+      const { name, description } = category;
 
-      const existCategory = this.categoriesRepository.findByName(name)
+      const existCategory = this.categoriesRepository.findByName(name);
 
       if (existCategory == null) {
         this.categoriesRepository.create({
           name,
           description
-        })
+        });
       }
-    })
+    });
   }
 }
 
-export { ImportCategoriesUseCase }
+export { ImportCategoriesUseCase };

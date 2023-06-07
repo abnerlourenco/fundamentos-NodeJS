@@ -1,44 +1,44 @@
-import { Specification } from '../../model/Specification'
-import { type ISpecificationRepository, type ICreateSpecificationDTO } from '../ISpecificationsRepository'
+import { Specification } from '../../model/Specification';
+import { type ISpecificationRepository, type ICreateSpecificationDTO } from '../ISpecificationsRepository';
 
 class SpecificationsRepository implements ISpecificationRepository {
-  private readonly specification: Specification[]
+  private readonly specification: Specification[];
 
-  private static INSTANCE: SpecificationsRepository
+  private static INSTANCE: SpecificationsRepository;
 
   private constructor () {
-    this.specification = []
+    this.specification = [];
   }
 
   public static getInstance (): SpecificationsRepository {
     // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
     if (!SpecificationsRepository.INSTANCE) {
-      SpecificationsRepository.INSTANCE = new SpecificationsRepository()
+      SpecificationsRepository.INSTANCE = new SpecificationsRepository();
     }
 
-    return SpecificationsRepository.INSTANCE
+    return SpecificationsRepository.INSTANCE;
   }
 
   create ({ description, name }: ICreateSpecificationDTO): void {
-    const specification = new Specification()
+    const specification = new Specification();
 
     Object.assign(specification, {
       name,
       description,
       created_at: new Date()
-    })
+    });
 
-    this.specification.push(specification)
+    this.specification.push(specification);
   }
 
   list (): Specification[] {
-    return this.specification
+    return this.specification;
   }
 
   findByName (name: string): Specification | undefined {
-    const specification = this.specification.find((specification) => specification.name === name)
-    return specification
+    const specification = this.specification.find((specification) => specification.name === name);
+    return specification;
   }
 }
 
-export { SpecificationsRepository }
+export { SpecificationsRepository };

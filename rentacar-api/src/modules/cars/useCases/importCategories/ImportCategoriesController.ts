@@ -1,15 +1,19 @@
-import { type Request, type Response } from 'express'
+import { type Request, type Response } from 'express';
 
-import { type ImportCategoriesUseCase } from './ImportCategoriesUseCase'
+import { type ImportCategoriesUseCase } from './ImportCategoriesUseCase';
 
 class ImportCategoriesController {
   constructor (private readonly importCategoriesUseCase: ImportCategoriesUseCase) {}
   handle (request: Request, response: Response): Response {
-    const { file } = request
+    const { file } = request;
 
-    this.importCategoriesUseCase.execute(file)
-    return response.send()
+    if (!file) {
+      return response.status(400).json({ message: 'Bad Request - file not found' });
+    }
+
+    void this.importCategoriesUseCase.execute(file);
+    return response.send();
   }
 }
 
-export { ImportCategoriesController }
+export { ImportCategoriesController };

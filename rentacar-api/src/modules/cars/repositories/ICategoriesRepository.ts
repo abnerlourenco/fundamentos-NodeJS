@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/method-signature-style */
-import { type Category } from '../model/Category'
+import { type Category } from '../model/Category';
 
 interface ICreateCategoryDTO {
   name: string
@@ -12,4 +12,4 @@ interface ICategoryRepository {
   create({ name, description }: ICreateCategoryDTO): void
 }
 
-export type { ICreateCategoryDTO, ICategoryRepository }
+export type { ICreateCategoryDTO, ICategoryRepository };
