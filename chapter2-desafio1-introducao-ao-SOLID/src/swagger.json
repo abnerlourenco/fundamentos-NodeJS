@@ -1,0 +1,139 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "User API Documentation",
+        "description": "Api para criar usuarios e controlar as permissões de acesso admin",
+        "version": "1.0.0",
+        "contact": {
+            "email": "suporte@user_api.com"
+        }
+    },
+    "paths": {
+        "/users": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Create a User",
+                "description": "Create a new user",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "name": "username sample",
+                                    "email": "sample@sample.com"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    },
+                    "400": {
+                        "description": "User already exists",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "List all users",
+                "description": "List all registered users, need to be a admin user to request a list",
+                "parameters": [
+                    {
+                        "name": "admin userId",
+                        "in": "",
+                        "description": "admin user Id to receive a list of users",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],                
+                "responses": {
+                    "200": {
+                        "description": "Sucessfully returned a list of users",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "type":"string"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "email": {
+                                                "type": "string"
+                                            },
+                                            "admin": {
+                                                "type": "string"
+                                            },
+                                            "updated_at": {
+                                                "type": "string"
+                                            },
+                                            "created_at": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "example": {
+                                            "id": "uuid",
+                                            "name": "username sample",
+                                            "email": "sample@sample.com",
+                                            "admin": false,
+                                            "updated_at": "202x-xx-xxT01:37:49.317Z",
+                                            "created_at": "202x-xx-xxT01:37:49.317Z"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
