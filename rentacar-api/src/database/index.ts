@@ -5,6 +5,6 @@ export const connection = new DataSource({
   host: 'localhost',
   port: 5432,
   database: 'rentacar',
-  username: 'my_username',
-  password: 'my_password'
+  username: 'docker',
+  password: 'admin'
 });
