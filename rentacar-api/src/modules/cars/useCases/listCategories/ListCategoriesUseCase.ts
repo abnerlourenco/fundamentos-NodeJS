@@ -5,9 +5,9 @@ class ListCategoriesUseCase {
   constructor (private readonly categoriesRepository: ICategoryRepository) {}
 
   async execute (): Promise<Category[]> {
-    const categories = this.categoriesRepository.list();
+    const categories = await this.categoriesRepository.list();
 
-    return await categories;
+    return categories;
   }
 }
 
