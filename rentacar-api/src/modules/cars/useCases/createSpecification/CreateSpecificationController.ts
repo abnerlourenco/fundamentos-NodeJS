@@ -6,11 +6,15 @@ class CreateSpecificationController {
   constructor (private readonly createSpecificationUseCase: CreateSpecificationUseCase) {}
 
   handle (request: Request, response: Response): Response {
-    const { name, description } = request.body;
+    try {
+      const { name, description } = request.body;
 
-    this.createSpecificationUseCase.execute({ name, description });
+      this.createSpecificationUseCase.execute({ name, description });
 
-    return response.status(201).send();
+      return response.status(201).send();
+    } catch (error) {
+      return response.status(404).json({ error: error.message });
+    }
   }
 }
 

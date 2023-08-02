@@ -12,7 +12,7 @@ class ImportCategoriesController {
     }
 
     await this.importCategoriesUseCase.execute(file);
-    return response.send();
+    return response.status(200).send();
   }
 }
 

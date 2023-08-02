@@ -1,5 +1,7 @@
 import { DataSource } from 'typeorm';
 
+import { Category } from '../modules/cars/entities/Category';
+
 export const connection = new DataSource({
   type: 'postgres',
   host: 'localhost',
@@ -7,6 +9,7 @@ export const connection = new DataSource({
   database: 'rentacar',
   username: 'docker',
   password: 'admin',
+  entities: [Category],
   migrations: ['./src/database/migrations/*.ts']
 });
 
