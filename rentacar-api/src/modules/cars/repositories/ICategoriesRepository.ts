@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/method-signature-style */
-import { type Category } from '../model/Category';
+import { type Category } from '../entities/Category';
 
 interface ICreateCategoryDTO {
   name: string
@@ -7,9 +7,9 @@ interface ICreateCategoryDTO {
 }
 
 interface ICategoryRepository {
-  findByName(name: string): Category | undefined
-  list(): Category[]
-  create({ name, description }: ICreateCategoryDTO): void
+  findByName(name: string): Promise<Category | null>
+  list(): Promise<Category[]>
+  create({ name, description }: ICreateCategoryDTO): Promise<void>
 }
 
 export type { ICreateCategoryDTO, ICategoryRepository };

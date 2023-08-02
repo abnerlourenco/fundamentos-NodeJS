@@ -1,13 +1,13 @@
-import { type Category } from '../../model/Category';
+import { type Category } from '../../entities/Category';
 import { type ICategoryRepository } from '../../repositories/ICategoriesRepository';
 
 class ListCategoriesUseCase {
   constructor (private readonly categoriesRepository: ICategoryRepository) {}
 
-  execute (): Category[] {
+  async execute (): Promise<Category[]> {
     const categories = this.categoriesRepository.list();
 
-    return categories;
+    return await categories;
   }
 }
 
