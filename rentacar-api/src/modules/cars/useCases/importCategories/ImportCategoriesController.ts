@@ -1,17 +1,19 @@
 import { type Request, type Response } from 'express';
+import { container } from 'tsyringe';
 
-import { type ImportCategoriesUseCase } from './ImportCategoriesUseCase';
+import { ImportCategoriesUseCase } from './ImportCategoriesUseCase';
 
 class ImportCategoriesController {
-  constructor (private readonly importCategoriesUseCase: ImportCategoriesUseCase) {}
   async handle (request: Request, response: Response): Promise<Response> {
     const { file } = request;
+
+    const importCategoriesUseCase = container.resolve(ImportCategoriesUseCase);
 
     if (!file) {
       return response.status(400).json({ message: 'Bad Request - file not found' });
     }
 
-    await this.importCategoriesUseCase.execute(file);
+    await importCategoriesUseCase.execute(file);
     return response.status(200).send();
   }
 }
