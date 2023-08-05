@@ -1,42 +1,34 @@
+import { type Repository } from 'typeorm';
+
+import { connection } from '../../../../database';
 import { Specification } from '../../entities/Specification';
 import { type ISpecificationRepository, type ICreateSpecificationDTO } from '../ISpecificationsRepository';
 
 class SpecificationsRepository implements ISpecificationRepository {
-  private readonly specification: Specification[];
+  private readonly repository: Repository<Specification>;
 
-  private static INSTANCE: SpecificationsRepository;
-
-  private constructor () {
-    this.specification = [];
+  constructor () {
+    this.repository = connection.getRepository(Specification);
   }
 
-  public static getInstance (): SpecificationsRepository {
-    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-    if (!SpecificationsRepository.INSTANCE) {
-      SpecificationsRepository.INSTANCE = new SpecificationsRepository();
-    }
-
-    return SpecificationsRepository.INSTANCE;
-  }
-
-  create ({ description, name }: ICreateSpecificationDTO): void {
-    const specification = new Specification();
-
-    Object.assign(specification, {
+  async create ({ description, name }: ICreateSpecificationDTO): Promise<void> {
+    const specification = this.repository.create({
       name,
-      description,
-      created_at: new Date()
+      description
     });
 
-    this.specification.push(specification);
+    await this.repository.save(specification);
   }
 
-  list (): Specification[] {
-    return this.specification;
+  async list (): Promise<Specification[]> {
+    const specifications = await this.repository.find();
+
+    return specifications;
   }
 
-  findByName (name: string): Specification | undefined {
-    const specification = this.specification.find((specification) => specification.name === name);
+  async findByName (name: string): Promise<Specification | null> {
+    const specification = await this.repository.findOneBy({ name });
+
     return specification;
   }
 }
